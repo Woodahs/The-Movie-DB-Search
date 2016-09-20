@@ -6,15 +6,16 @@
         text-align: center;
     }
     .m-search_input {
-        border:1px solid $cl-grey6;
+        border: 1px solid $cl-grey6;
         height: 30px;
         line-height: 30px;
         padding: 0 10px;
         color: $cl-grey2;
         width: 100%;
         display: block;
+        float: left;
         margin-bottom: 10px;
-        display: inline-block;
+        border: none;
         @include placeholder {
             color: $cl-grey9;
             font-size: 12px;
