@@ -54,59 +54,42 @@
 	/*** IMPORTS FROM imports-loader ***/
 
 
+	/*
+	 *  main controller of the application
+	 */
 	"use strict";
 
-	var _searchController = __webpack_require__(2);
-
-	var _searchController2 = _interopRequireDefault(_searchController);
-
-	var _databaseRequest = __webpack_require__(3);
+	var _databaseRequest = __webpack_require__(2);
 
 	var _databaseRequest2 = _interopRequireDefault(_databaseRequest);
 
-	var _resultsController = __webpack_require__(4);
+	var _resultsController = __webpack_require__(3);
 
 	var _resultsController2 = _interopRequireDefault(_resultsController);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_searchController2.default.init(); /*
-	                                    *  main controller of the application
-	                                    */
+	var searchForm = document.getElementById("js-search");
+	var searchInput = document.getElementById("js-search_input");
 
-	_databaseRequest2.default.search("fight", function (response) {
-	  console.debug(response);
-	});
-	_resultsController2.default.init();
+	var onSearchFormSubmit = function onSearchFormSubmit(e) {
+	    e ? e.preventDefault() : "";
+	    if (searchInput.value !== "") {
+	        _databaseRequest2.default.search(searchInput.value, function (response) {
+	            if (response.results && response.results.length > 0) {
+	                _resultsController2.default.displayResults(response.results);
+	            } else {
+	                _resultsController2.default.displayError("Brak wyników");
+	            }
+	        });
+	    }
+	};
+	searchForm.addEventListener("submit", onSearchFormSubmit);
+	onSearchFormSubmit();
 
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-	/*** IMPORTS FROM imports-loader ***/
-
-
-	"use strict";
-
-	/*
-	 *  utility for controlling search
-	 */
-
-	var searchController = function () {
-	    var init = function init() {
-	        console.log("searchController initialized");
-	    };
-	    return {
-	        init: init
-	    };
-	}();
-
-	module.exports = searchController;
-
-
-/***/ },
-/* 3 */
 /***/ function(module, exports) {
 
 	/*** IMPORTS FROM imports-loader ***/
@@ -152,7 +135,7 @@
 
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 	/*** IMPORTS FROM imports-loader ***/
@@ -165,11 +148,23 @@
 	 */
 
 	var resultsController = function () {
-	    var init = function init() {
-	        console.log("resultsController initialized");
+	    var resultsContainer = document.getElementById("js-searchResults");
+
+	    // displays search results using built in template
+	    var displayResults = function displayResults(results) {
+	        resultsContainer.innerHTML = "";
+	        for (var i = 0; i < results.length; i++) {
+	            if (results[i].poster_path) {
+	                resultsContainer.innerHTML = resultsContainer.innerHTML + '<a href="#" class="m-contentBox_item">' + '<div class="m-contentBox_image">' + '<img src="http://image.tmdb.org/t/p/w154' + results[i].poster_path + '" alt="' + results[i].original_title + '">' + '</div>' + '<div class="m-contentBox_content">' + '<div class="m-contentBox_title">' + '<h2>' + results[i].original_title + '</h2>' + '</div>' + '</div>' + '</a>';
+	            }
+	        }
+	    };
+	    var displayError = function displayError(error) {
+	        resultsContainer.innerHTML = '<p>' + error + '</p>';
 	    };
 	    return {
-	        init: init
+	        displayResults: displayResults,
+	        displayError: displayError
 	    };
 	}();
 

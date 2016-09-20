@@ -14,32 +14,11 @@
         <main class="b-mainWrapper">
             <h1 class="m-typo m-typo_headline">The Movie DB Search</h1>
             <form id="js-search" class="m-search clearfix2">
-                <input type="text" class="m-search_input">
+                <input id="js-search_input" type="text" class="m-search_input">
                 <button type="submit" id="js-search_trigger" href="#" class="m-search_button">Search</button>
             </form>
-            <section id="js-searchResults" class="b-searchResults">
-                <div class="m-contentBox clearfix2">
-                    <a href="#" class="m-contentBox_item">
-                        <div class="m-contentBox_image">
-                            <img src="http://placehold.it/100x100" alt="Movie title">
-                        </div>
-                        <div class="m-contentBox_content">
-                            <div class="m-contentBox_title">
-                                <h2>Movie title</h2>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="m-contentBox_item">
-                        <div class="m-contentBox_image">
-                            <img src="http://placehold.it/100x100" alt="Movie title">
-                        </div>
-                        <div class="m-contentBox_content">
-                            <div class="m-contentBox_title">
-                                <h2>Movie title</h2>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+            <section class="b-searchResults">
+                <div id="js-searchResults" class="m-contentBox clearfix2"></div>
             </section>
         </main>
 
