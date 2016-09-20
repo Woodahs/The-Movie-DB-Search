@@ -1,26 +1,34 @@
 /*
  *  main controller of the application
  */
-"use strict";
 import databaseRequest from "./modules/databaseRequest.js";
 import resultsController from "./modules/resultsController.js";
 
-var searchForm = document.getElementById("js-search");
-var searchInput = document.getElementById("js-search_input");
+(function() {
+    "use strict";
 
-var onSearchFormSubmit = function(e) {
-    e.preventDefault();
-    if (searchInput.value !== "") {
-        databaseRequest.search(searchInput.value, function(response) {
-            if (response.results && response.results.length > 0) {
-                resultsController.displayResults(response.results);
-            } else {
-                resultsController.displayError("Brak wyników");
-            }
-        });
-    } else {
-        resultsController.displayError("Type something to use search...");
-    }
-};
-searchForm.addEventListener("submit", onSearchFormSubmit);
+    var searchForm = document.getElementById("js-search");
+    var searchInput = document.getElementById("js-search_input");
 
+    var onSearchSuccess = function(response) {
+        if (response.results && response.results.length > 0) {
+            resultsController.displayResults(response.results);
+        } else {
+            resultsController.displayError("No results");
+        }
+    };
+
+    var onSearchSuccess = function(error) {
+        resultsController.displayError(error);
+    };
+
+    var onSearchFormSubmit = function(e) {
+        e.preventDefault();
+        if (searchInput.value !== "") {
+            databaseRequest.search(searchInput.value, onSearchSuccess, onSearchError);
+        } else {
+            resultsController.displayError("Type something to use search...");
+        }
+    };
+    searchForm.addEventListener("submit", onSearchFormSubmit);
+})();

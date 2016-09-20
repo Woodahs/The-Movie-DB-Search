@@ -54,9 +54,6 @@
 	/*** IMPORTS FROM imports-loader ***/
 
 
-	/*
-	 *  main controller of the application
-	 */
 	"use strict";
 
 	var _databaseRequest = __webpack_require__(2);
@@ -69,24 +66,37 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var searchForm = document.getElementById("js-search");
-	var searchInput = document.getElementById("js-search_input");
+	/*
+	 *  main controller of the application
+	 */
+	(function () {
+	    "use strict";
 
-	var onSearchFormSubmit = function onSearchFormSubmit(e) {
-	    e ? e.preventDefault() : "";
-	    if (searchInput.value !== "") {
-	        _databaseRequest2.default.search(searchInput.value, function (response) {
-	            if (response.results && response.results.length > 0) {
-	                _resultsController2.default.displayResults(response.results);
-	            } else {
-	                _resultsController2.default.displayError("Brak wyników");
-	            }
-	        });
-	    } else {
-	        _resultsController2.default.displayError("Type something to use search...");
-	    }
-	};
-	searchForm.addEventListener("submit", onSearchFormSubmit);
+	    var searchForm = document.getElementById("js-search");
+	    var searchInput = document.getElementById("js-search_input");
+
+	    var onSearchSuccess = function onSearchSuccess(response) {
+	        if (response.results && response.results.length > 0) {
+	            _resultsController2.default.displayResults(response.results);
+	        } else {
+	            _resultsController2.default.displayError("No results");
+	        }
+	    };
+
+	    var onSearchSuccess = function onSearchSuccess(error) {
+	        _resultsController2.default.displayError(error);
+	    };
+
+	    var onSearchFormSubmit = function onSearchFormSubmit(e) {
+	        e.preventDefault();
+	        if (searchInput.value !== "") {
+	            _databaseRequest2.default.search(searchInput.value, onSearchSuccess, onSearchError);
+	        } else {
+	            _resultsController2.default.displayError("Type something to use search...");
+	        }
+	    };
+	    searchForm.addEventListener("submit", onSearchFormSubmit);
+	})();
 
 
 /***/ },
@@ -127,6 +137,7 @@
 
 	        request.send();
 	    };
+
 	    return {
 	        search: search
 	    };
@@ -165,6 +176,7 @@
 	    var displayError = function displayError(error) {
 	        resultsContainer.innerHTML = '<p>' + error + '</p>';
 	    };
+
 	    return {
 	        displayResults: displayResults,
 	        displayError: displayError
