@@ -9,7 +9,7 @@ var databaseRequest = (function() {
     // function for searching movie in database
     var search = function(query, onSuccess, onError) {
         var request = new XMLHttpRequest();
-        var requestUrl = "http://api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey;
+        var requestUrl = "//api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey;
 
         request.open('POST', requestUrl);
 

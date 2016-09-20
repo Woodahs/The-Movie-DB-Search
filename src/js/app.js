@@ -18,7 +18,7 @@ import resultsController from "./modules/resultsController.js";
         }
     };
 
-    var onSearchSuccess = function(error) {
+    var onSearchError = function(error) {
         resultsController.displayError(error);
     };
 

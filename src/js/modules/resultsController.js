@@ -11,9 +11,9 @@ var resultsController = (function() {
         for (var i = 0; i < results.length; i++) {
             if (results[i].poster_path) {
                 resultsContainer.innerHTML = resultsContainer.innerHTML +
-                '<a href="http://www.themoviedb.org/movie/' + results[i].id + '" target="_blank" class="m-contentBox_item">' +
+                '<a href="//www.themoviedb.org/movie/' + results[i].id + '" target="_blank" class="m-contentBox_item">' +
                     '<div class="m-contentBox_image">' +
-                        '<img src="http://image.tmdb.org/t/p/w154' + results[i].poster_path + '" alt="' + results[i].original_title + '">' +
+                        '<img src="//image.tmdb.org/t/p/w154' + results[i].poster_path + '" alt="' + results[i].original_title + '">' +
                     '</div>' +
                     '<div class="m-contentBox_content">' +
                         '<div class="m-contentBox_title">' + 
@@ -29,7 +29,7 @@ var resultsController = (function() {
     var displayError = function(error) {
         resultsContainer.innerHTML = '<p>' + error + '</p>';
     }
-    
+
     return {
         displayResults: displayResults,
         displayError: displayError

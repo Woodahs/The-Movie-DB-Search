@@ -83,7 +83,7 @@
 	        }
 	    };
 
-	    var onSearchSuccess = function onSearchSuccess(error) {
+	    var onSearchError = function onSearchError(error) {
 	        _resultsController2.default.displayError(error);
 	    };
 
@@ -119,7 +119,7 @@
 	    // function for searching movie in database
 	    var search = function search(query, onSuccess, onError) {
 	        var request = new XMLHttpRequest();
-	        var requestUrl = "http://api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey;
+	        var requestUrl = "//api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey;
 
 	        request.open('POST', requestUrl);
 
@@ -167,7 +167,7 @@
 	        resultsContainer.innerHTML = "";
 	        for (var i = 0; i < results.length; i++) {
 	            if (results[i].poster_path) {
-	                resultsContainer.innerHTML = resultsContainer.innerHTML + '<a href="http://www.themoviedb.org/movie/' + results[i].id + '" target="_blank" class="m-contentBox_item">' + '<div class="m-contentBox_image">' + '<img src="http://image.tmdb.org/t/p/w154' + results[i].poster_path + '" alt="' + results[i].original_title + '">' + '</div>' + '<div class="m-contentBox_content">' + '<div class="m-contentBox_title">' + '<h2>' + results[i].original_title + '</h2>' + '</div>' + '</div>' + '</a>';
+	                resultsContainer.innerHTML = resultsContainer.innerHTML + '<a href="//www.themoviedb.org/movie/' + results[i].id + '" target="_blank" class="m-contentBox_item">' + '<div class="m-contentBox_image">' + '<img src="//image.tmdb.org/t/p/w154' + results[i].poster_path + '" alt="' + results[i].original_title + '">' + '</div>' + '<div class="m-contentBox_content">' + '<div class="m-contentBox_title">' + '<h2>' + results[i].original_title + '</h2>' + '</div>' + '</div>' + '</a>';
 	            }
 	        }
 	    };
