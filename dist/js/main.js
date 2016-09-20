@@ -74,9 +74,11 @@
 	                                    *  main controller of the application
 	                                    */
 
-	_databaseRequest2.default.init();
+	_databaseRequest2.default.search("fight", function (response) {
+	  console.debug(response);
+	});
 	_resultsController2.default.init();
-	
+
 
 /***/ },
 /* 2 */
@@ -101,7 +103,7 @@
 	}();
 
 	module.exports = searchController;
-	
+
 
 /***/ },
 /* 3 */
@@ -117,16 +119,37 @@
 	 */
 
 	var databaseRequest = function () {
-	    var init = function init() {
-	        console.log("databaseRequest initialized");
+	    // API key from The Movie DB
+	    var apiKey = "cd3830f6d23cb81d7f9def86dce69b68";
+
+	    // function for searching movie in database
+	    var search = function search(query, onSuccess, onError) {
+	        var request = new XMLHttpRequest();
+	        var requestUrl = "http://api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey;
+
+	        request.open('POST', requestUrl);
+
+	        request.setRequestHeader('Accept', 'application/json');
+
+	        request.onreadystatechange = function () {
+	            if (this.readyState === 4) {
+	                if (this.status === 200) {
+	                    onSuccess(JSON.parse(this.response));
+	                } else {
+	                    onError(this.statusText);
+	                }
+	            }
+	        };
+
+	        request.send();
 	    };
 	    return {
-	        init: init
+	        search: search
 	    };
 	}();
 
 	module.exports = databaseRequest;
-	
+
 
 /***/ },
 /* 4 */
@@ -151,8 +174,7 @@
 	}();
 
 	module.exports = resultsController;
-	
+
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=main.js.map

@@ -7,5 +7,7 @@ import databaseRequest from "./modules/databaseRequest.js";
 import resultsController from "./modules/resultsController.js";
 
 searchController.init();
-databaseRequest.init();
+databaseRequest.search("fight", function(response) {
+    console.debug(response);
+});
 resultsController.init();

@@ -4,7 +4,7 @@ var webpack = require("webpack");
 
 
 module.exports = {
-    devtool: 'cheap-module-source-map',
+    // devtool: 'cheap-module-source-map',
     entry: {
         main: [
             config.webpack.mainEntry
