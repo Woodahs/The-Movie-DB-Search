@@ -5,12 +5,11 @@
 import databaseRequest from "./modules/databaseRequest.js";
 import resultsController from "./modules/resultsController.js";
 
-
 var searchForm = document.getElementById("js-search");
 var searchInput = document.getElementById("js-search_input");
 
 var onSearchFormSubmit = function(e) {
-    e ? e.preventDefault() : "";
+    e.preventDefault();
     if (searchInput.value !== "") {
         databaseRequest.search(searchInput.value, function(response) {
             if (response.results && response.results.length > 0) {
@@ -19,7 +18,9 @@ var onSearchFormSubmit = function(e) {
                 resultsController.displayError("Brak wyników");
             }
         });
+    } else {
+        resultsController.displayError("Type something to use search...");
     }
 };
-searchForm.addEventListener("submit", onSearchFormSubmit)
-onSearchFormSubmit();
+searchForm.addEventListener("submit", onSearchFormSubmit);
+

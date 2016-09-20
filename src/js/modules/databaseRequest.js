@@ -27,6 +27,7 @@ var databaseRequest = (function() {
 
         request.send();
     }
+
     return {
         search: search
     }
