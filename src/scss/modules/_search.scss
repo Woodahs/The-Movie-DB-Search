@@ -1,0 +1,36 @@
+.m-search {
+    padding-right: 95px;
+    max-width: 700px;
+    margin: 0 auto;
+    @include breakpoint(tablet) {
+        text-align: center;
+    }
+    .m-search_input {
+        border:1px solid $cl-grey6;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: $cl-grey2;
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        display: inline-block;
+        @include placeholder {
+            color: $cl-grey9;
+            font-size: 12px;
+            opacity: 1;
+        }
+    }
+    .m-search_button {
+        background: $cl-searchButton;
+        display: block;
+        padding: 7px 20px;
+        border: none;
+        float: right;
+        margin-right: -95px;
+        transition: background-color .25s;
+        &:hover {
+            background-color: rgba($cl-searchButton, .8);
+        }
+    }
+}

@@ -1,12 +1,24 @@
 @import "custom/*";
-// @import "modules/*";
+@import "modules/*"; 
 
 body {
 	font: 400 14px/1.17 $font-primary;
+    background-color: $cl-grey28;
+    color: $cl-greyE;
 	a {
 		text-decoration: none;
-		&:hover {
-			text-decoration: none;
-		}
+        color: inherit;
 	}
+}
+
+.b-mainWrapper {
+    background: $cl-grey2D;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+}
+
+.b-searchResults {
+    margin-top: 40px;
 }

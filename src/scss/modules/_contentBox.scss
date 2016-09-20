@@ -1,0 +1,42 @@
+.m-contentBox {
+    .m-contentBox_item {
+        padding: 10px;
+        float: left;
+        width: 50%;
+        text-align: center;
+        @include breakpoint(phone_big) {
+            width: 33.333%;
+        }
+        @include breakpoint(tablet) {
+            width: 25%;
+        }
+        @include breakpoint(desktop_small) {
+            width: 20%;
+        }
+        &:hover {
+            .m-contentBox_title {
+                &:after, &:before {
+                    width: 50%;
+                }
+            }
+            img {
+                transform: scale(1.1);
+            }
+        }
+    }
+    .m-contentBox_image {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 10;
+        img {
+            display: block;
+            transition: transform .3s;
+        }
+    }
+    .m-contentBox_title {
+        margin-top: 10px;
+    }
+}
